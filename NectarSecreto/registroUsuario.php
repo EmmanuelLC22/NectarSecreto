@@ -31,37 +31,43 @@
           </div>
 
             <div class="form-outline mb-4">
-              <input type="email" id="form2Example18" class="form-control form-control-lg" />
+              <input type="text" name="nombre" id="inputNombre" class="form-control form-control-lg" />
               <label class="form-label" for="form2Example18">Nombre de usuario</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Correo electronico</label>
+              <input type="text" name="apaterno" id="inputaPaterno" class="form-control form-control-lg" />
+              <label class="form-label" for="inputaPaterno">Apellido Paterno</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Numero de telefono fijo</label>
+              <input type="text" name="apaterno" id="inputaMaterno" class="form-control form-control-lg" />
+              <label class="form-label" for="inputaMaterno">Apellido Materno</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Numero de telefono celular</label>
+              <input type="email" name="usuario" id="inputEmail" class="form-control form-control-lg" />
+              <label class="form-label" for="inputEmail">Correo electronico</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Contraseña</label>
+              <input type="number" id="numero" class="form-control form-control-lg" />
+              <label class="form-label" for="inpuTelefono">Numero de telefono fijo</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Repita la contraseña</label>
+              <input type="text" name="direccion" id="inputDireccion" class="form-control form-control-lg" />
+              <label class="form-label" for="inputDireccion">Direccion</label>
+            </div>
+            
+
+            <div class="form-outline mb-4">
+              <input type="password" id="inputPassword" name="pass" class="form-control form-control-lg" required/>
+              <label class="form-label" for="inputPassword">Contraseña</label>
             </div>
 
             <div class="pt-1 mb-4">
-              <button class="btn btn-warning btn-lg btn-block" type="button">Registrar</button>
+              <button class="btn btn-warning btn-lg btn-block" type="submit">Registrar</button>
             </div>
 
           </form>

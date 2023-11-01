@@ -43,7 +43,7 @@
             </div>
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Olvidaste tu contraseña?</a></p>
-            <p>No tienes una cuenta? <a href="#!" class="text-warning">Registrate aqui</a></p>
+            <p>No tienes una cuenta? <a href="./registroUsuario.php" class="text-warning">Registrate aqui</a></p>
 
           </form>
 

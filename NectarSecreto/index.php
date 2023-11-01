@@ -15,11 +15,11 @@
         </div>
 		<nav>
 			<ul class="link">
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">TIENDA</a></li>
-				<li><a href="#">NOSOTROS</a></li>
-				<li><a href="#">PUNTOS DE VENTA</a></li>
-				<li><a href="#">BLOG</a></li>
+				<li><a href="./login.php">HOME</a></li>
+				<li><a href="./login.php">TIENDA</a></li>
+				<li><a href="./login.php">NOSOTROS</a></li>
+				<li><a href="./login.php">PUNTOS DE VENTA</a></li>
+				<li><a href="./login.php">BLOG</a></li>
 			</ul>
 		</nav>
         <div class="logo2">
@@ -38,7 +38,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Miel pura</h5>
                         <p class="card-text">Nuestra miel es 100% extraida de las abejas sin tratamiento artificial</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
@@ -49,7 +49,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Ecologica</h5>
                         <p class="card-text">El precio de nuestros productos se ajusta a su bolsillo mientras ayudamos al medio ambiebte</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
@@ -60,7 +60,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Productos variados</h5>
                         <p class="card-text">Aparte de la miel contamos con productos de bellesa y decoracion del hogar</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
@@ -77,7 +77,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Compra en linea</h5>
                         <p class="card-text">visita nuestra tienda en linea y conoce nuestros productos!</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Registrate</h5>
                         <p class="card-text">Al tener una cuenta podras opinar hacerca de nuesros productos y comprar mas facilmente</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="card-body">
                         <h5 class="card-title">Puntos de venta</h5>
                         <p class="card-text">Conoce las tiendas mas cercanas a tu hogar para comprar tus productos favoritos</p>
-                        <a href="#" class="btn btn-dark">Visitar</a>
+                        <a href="./login.php" class="btn btn-dark">Visitar</a>
                         </div>
                     </div>
                     </div>
