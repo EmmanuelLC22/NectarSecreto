@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi portafolio</title>
+    <title>Nectar Secreto</title>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -26,20 +26,21 @@
 
           <form style="width: 23rem;">
 
+
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicio de sesion</h3>
 
             <div class="form-outline mb-4">
-              <input type="email" id="form2Example18" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Correo Electronico</label>
-            </div>
+              <input type="email" name="email" id="floatingInput" class="form-control form-control-lg" />
+              <label class="form-label" for="floatingInput">Correo Electronico</label>
+            </div>Ss
 
             <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Contraseña</label>
+              <input type="password" name="password" id="floatingPassword" class="form-control form-control-lg" />
+              <label class="form-label" for="floatingPassword">Contraseña</label>
             </div>
 
             <div class="pt-1 mb-4">
-              <button class="btn btn-warning btn-lg btn-block" type="button">Iniciar Sesion</button>
+              <button class="btn btn-warning btn-lg btn-block" type="submit">Iniciar Sesion</button>
             </div>
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Olvidaste tu contraseña?</a></p>

@@ -1,3 +1,29 @@
+<?php
+
+require './modelo/conexionPDO.php';
+
+$message = '';
+
+if (!empty($_POST['usuario']) && !empty($_POST['pass'])) {
+  $sql = "INSERT INTO t_usuarios (nombre, apaterno, apaterno, usuario, numero, direccion, pass) VALUES (:nombre, :apaterno, :apaterno, :usuario, :numero, :direccion, :pass)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bindParam(':nombre', $_POST['nombre']);
+  $stmt->bindParam(':apaterno', $_POST['apaterno']);
+  $stmt->bindParam(':apaterno', $_POST['apaterno']);
+  $stmt->bindParam(':usuario', $_POST['usuario']);
+  $stmt->bindParam(':numero', $_POST['numero']);
+  $stmt->bindParam(':direccion', $_POST['direccion']);
+  $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+  $stmt->bindParam(':pass', $password);
+
+  if ($stmt->execute()) {
+    $message = 'Usuario creado exitosamente';
+  } else {
+    $message = 'Hubo un problema al crear tu cuenta';
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
