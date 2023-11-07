@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi portafolio</title>
+    <title>Nectar Secreto</title>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -15,17 +15,19 @@
         </div>
 		<nav>
 			<ul class="link">
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">TIENDA</a></li>
-				<li><a href="#">NOSOTROS</a></li>
-				<li><a href="#">PUNTOS DE VENTA</a></li>
-				<li><a href="#">BLOG</a></li>
+				<li><a href="./indexUsuario.php">HOME</a></li>
+				<li><a href="./tienda.php">TIENDA</a></li>
+				<li><a href="./nosotros.php">NOSOTROS</a></li>
+				<li><a href="./tiendas.php">PUNTOS DE VENTA</a></li>
+				<li><a href="./blog.php">BLOG</a></li>
 			</ul>
 		</nav>
         <div class="logo2">
+            <a href="Usuario.php">
             <img src="./img/usuario.png" alt="usuario">
         </div>
         <div class="logo2">
+            <a href="carrito.php">
             <img src="./img/carrito.png" alt="carrito">
         </div>
 	</header>
@@ -73,6 +75,7 @@
 	<section>
         <div class="center">
             <h1>PRODUCTOS</h1>
+        </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">

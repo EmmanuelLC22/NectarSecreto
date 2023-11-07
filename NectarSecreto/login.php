@@ -24,19 +24,19 @@
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style="width: 23rem;">
+          <form style="width: 23rem;" method="POST" action="./controlador/validarRegistro.php">
 
 
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Inicio de sesion</h3>
 
             <div class="form-outline mb-4">
-              <input type="email" name="email" id="floatingInput" class="form-control form-control-lg" />
-              <label class="form-label" for="floatingInput">Correo Electronico</label>
-            </div>Ss
+              <input type="email" name="correo" class="form-control form-control-lg" />
+              <label class="form-label" for="correo">Correo Electronico</label>
+            </div>
 
             <div class="form-outline mb-4">
-              <input type="password" name="password" id="floatingPassword" class="form-control form-control-lg" />
-              <label class="form-label" for="floatingPassword">Contraseña</label>
+              <input type="password" name="clave" class="form-control form-control-lg" />
+              <label class="form-label" for="clave">Contraseña</label>
             </div>
 
             <div class="pt-1 mb-4">

@@ -1,35 +1,9 @@
-<?php
-
-require './modelo/conexionPDO.php';
-
-$message = '';
-
-if (!empty($_POST['usuario']) && !empty($_POST['pass'])) {
-  $sql = "INSERT INTO t_usuarios (nombre, apaterno, apaterno, usuario, numero, direccion, pass) VALUES (:nombre, :apaterno, :apaterno, :usuario, :numero, :direccion, :pass)";
-  $stmt = $conn->prepare($sql);
-  $stmt->bindParam(':nombre', $_POST['nombre']);
-  $stmt->bindParam(':apaterno', $_POST['apaterno']);
-  $stmt->bindParam(':apaterno', $_POST['apaterno']);
-  $stmt->bindParam(':usuario', $_POST['usuario']);
-  $stmt->bindParam(':numero', $_POST['numero']);
-  $stmt->bindParam(':direccion', $_POST['direccion']);
-  $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
-  $stmt->bindParam(':pass', $password);
-
-  if ($stmt->execute()) {
-    $message = 'Usuario creado exitosamente';
-  } else {
-    $message = 'Hubo un problema al crear tu cuenta';
-  }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi portafolio</title>
+    <title>Nectar secreto</title>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -50,50 +24,50 @@ if (!empty($_POST['usuario']) && !empty($_POST['pass'])) {
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
 
-          <form style="width: 23rem;">
+          <form style="width: 23rem;" method="POST" action="./controlador/registrarUsuario.php">
 
           <div class="center">
             <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Registro</h3>
           </div>
 
             <div class="form-outline mb-4">
-              <input type="text" name="nombre" id="inputNombre" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Nombre de usuario</label>
+              <input type="text" name="correo" class="form-control form-control-lg" />
+              <label class="form-label" for="correo">Correo electronico</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="text" name="apaterno" id="inputaPaterno" class="form-control form-control-lg" />
-              <label class="form-label" for="inputaPaterno">Apellido Paterno</label>
+              <input type="password" name="clave" class="form-control form-control-lg" />
+              <label class="form-label" for="clave">Contraseña</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="text" name="apaterno" id="inputaMaterno" class="form-control form-control-lg" />
-              <label class="form-label" for="inputaMaterno">Apellido Materno</label>
+              <input type="text" name="nombre" class="form-control form-control-lg" />
+              <label class="form-label" for="nombre">Nombre de usuario</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="email" name="usuario" id="inputEmail" class="form-control form-control-lg" />
-              <label class="form-label" for="inputEmail">Correo electronico</label>
+              <input type="text" name="apaterno" class="form-control form-control-lg" />
+              <label class="form-label" for="apaterno">Apellido Paterno</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="number" id="numero" class="form-control form-control-lg" />
-              <label class="form-label" for="inpuTelefono">Numero de telefono fijo</label>
+              <input type="text" name="amaterno" class="form-control form-control-lg" />
+              <label class="form-label" for="amaterno">Apellido Materno</label>
             </div>
 
             <div class="form-outline mb-4">
-              <input type="text" name="direccion" id="inputDireccion" class="form-control form-control-lg" />
-              <label class="form-label" for="inputDireccion">Direccion</label>
+              <input type="text" name="direccion" class="form-control form-control-lg" />
+              <label class="form-label" for="direccion">Direccion</label>
             </div>
-            
 
             <div class="form-outline mb-4">
-              <input type="password" id="inputPassword" name="pass" class="form-control form-control-lg" required/>
-              <label class="form-label" for="inputPassword">Contraseña</label>
+              <input type="text" name="telefono" class="form-control form-control-lg" />
+              <label class="form-label" for="telefono">Numero de telefono fijo</label>
             </div>
-
+          
             <div class="pt-1 mb-4">
-              <button class="btn btn-warning btn-lg btn-block" type="submit">Registrar</button>
+              <input class="btn btn-warning btn-lg btn-block" type="submit" value="Registar" name="registro">
+              <br><a href="login.php">Salir</a>
             </div>
 
           </form>

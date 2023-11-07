@@ -1,25 +1,35 @@
 <?php
-    session_start();
-    require("../modelo/conexionPDO.php");
-    $pass_nocifrada = $_POST['pass'];
-    $pass_cifrada = password_hash($pass_nocifrada, PASSWORD_DEFAULT, array("cost"=>10));
-    //echo $pass_nocifrada;
-    //echo "   " . " ". $pass_cifrada; 
-    if($conn == true){
-        $inserta = $conn -> prepare("INSERT INTO t_usuarios(correo,clave,nombreUsuario,aPaterno,aMaterno,direccion,telefono)VALUES (:correo, :clave, :nombre, :apaterno, :amaterno, :direccion, :telefono)");
-        $inserta -> bindParam(':correo', $_POST['usuario']);
-        $inserta -> bindParam(':clave', $pass_cifrada);
-        $inserta -> bindParam(':nombre', strtoupper($_POST['nombre']));
-        $inserta -> bindParam(':apaterno', strtoupper($_POST['apaterno']));
-        $inserta -> bindParam(':amaterno', strtoupper($_POST['amaterno']));
-        $inserta -> bindParam(':direccion', strtoupper($_POST['direccion']));
-        $inserta -> bindParam(':telefono', $_POST['telefono']);
-        
-        $inserta -> execute();
-
-        $conn = null;
-        header('Location: ../vista/TablaProducto');
-    }else {
-        echo "Error al procesar recurso";
-    }
-?>
+        require("../modelo/conexionPDO.php");
+        try{
+            //verifico los datos del login
+            $correo=htmlentities(addslashes($_POST['correo']));
+            $clave = $_POST['clave'];
+            $sql = "SELECT * FROM t_usuarios WHERE correo = :correo";
+            //preparo la consulta SQL
+            $resultado=$conn->prepare($sql);
+            //ejecucion de la consulta
+            $resultado->execute(array(":correo"=>$correo));
+            
+            $login=$resultado->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($clave, $login['clave'])) { 
+                echo '<script>
+                    Swal.fire({
+                    icon: "success",
+                    title:"Usuario aceptado",
+                    text: "Registro correcto",
+                    showConfirmButton: true,
+                    confirmButtonText: "Aceptar"
+                }) </script>'; 
+                header("Location: ../indexUsuario.php"); 
+            }else{
+                //Cierra cadena de conexión
+                $query = null;
+                $conn = null;
+                echo "Error de conexión";
+                header("Location: ../../index.php?error=si"); 
+            }
+    
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    ?>

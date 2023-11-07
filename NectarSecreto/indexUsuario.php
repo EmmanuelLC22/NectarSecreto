@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi portafolio</title>
+    <title>Nectar Secreto</title>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -23,9 +23,11 @@
 			</ul>
 		</nav>
         <div class="logo2">
+            <a href="Usuario.php">
             <img src="./img/usuario.png" alt="usuario">
         </div>
         <div class="logo2">
+            <a href="carrito.php">
             <img src="./img/carrito.png" alt="carrito">
         </div>
 	</header>
@@ -37,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" src="https://www.guiadesuplementos.mx/wp-content/uploads/2019/10/Miel-0-Valentyn-Volkov-47443030_l-scaled.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="https://hips.hearstapps.com/hmg-prod/images/miel-1662806527.jpg?crop=0.670xw:1.00xh;0,0&resize=1200:*" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">Miel pura</h5>
                         <p class="card-text">Nuestra miel es 100% extraida de las abejas sin tratamiento artificial</p>

@@ -124,6 +124,9 @@ header .abajo .link li a:hover{
 }
 .center{
     text-align: center;
+    text-decoration: none; /* Elimina cualquier subrayado de enlace */
+    color: inherit; /* Usa el color de texto predeterminado */
+    cursor: default; /* Restablece el cursor a su valor predeterminado */
 }
 
 .card {
