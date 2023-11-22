@@ -1,14 +1,11 @@
 <?php
-// adminUsuarios.php
 
-// Incluye el archivo de conexión
+
 include('../modelo/conexionPDO.php');
 
-// Borrar usuario si se recibe una solicitud de eliminación
 if (isset($_GET['eliminar']) && isset($_GET['id'])) {
     $idUsuario = $_GET['id'];
     
-    // Abre la conexión nuevamente
     include('../modelo/conexionPDO.php');
 
     $sqlBorrar = "DELETE FROM t_usuarios WHERE id = :id";
@@ -16,26 +13,26 @@ if (isset($_GET['eliminar']) && isset($_GET['id'])) {
     $stmt->bindParam(':id', $idUsuario, PDO::PARAM_INT);
     $stmt->execute();
     
-    // Cierra la conexión después de realizar la operación
+
     $conn = null;
 
-    header("Location: adminUsuarios.php"); // Redirige para evitar reenvío del formulario
+    header("Location: adminUsuarios.php"); 
     exit();
 }
 
-// Consulta todos los usuarios con ID ordenado
+
 $sql = 'SELECT * FROM t_usuarios ORDER BY id';
 $resultado = $conn->query($sql);
 
-// Verifica si hay resultados
+
 if ($resultado) {
-    // Obtiene todos los usuarios
+    
     $usuarios = $resultado->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo 'Error al obtener usuarios: ' . $conn->errorInfo()[2];
 }
 
-// Cierra la conexión
+
 $conn = null;
 ?>
 
@@ -50,7 +47,7 @@ $conn = null;
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../img/logo3.ico">
     <style>
-        /* Personalizaciones adicionales de estilo */
+        
         body {
             background-color: #f8f9fa;
         }
@@ -101,7 +98,7 @@ $conn = null;
         <br><br><br>
         <h2>Administrar Usuarios</h2>
 
-        <!-- Lista de usuarios -->
+      
         <table class="table table-bordered table-hover">
             <thead class="thead-light">
                 <tr>
@@ -115,11 +112,12 @@ $conn = null;
                 </tr>
             </thead>
             <tbody>
-                <!-- Genera dinámicamente las filas de la tabla -->
+                
                 <?php
+                $contadorId = 1; 
                 foreach ($usuarios as $usuario): ?>
                     <tr>
-                        <td><?php echo $usuario['id']; ?></td>
+                        <td><?php echo $contadorId; ?></td>
                         <td><?php echo $usuario['correo']; ?></td>
                         <td><?php echo $usuario['nombreUsuario']; ?></td>
                         <td><?php echo $usuario['aMaterno']; ?></td>
@@ -129,7 +127,9 @@ $conn = null;
                             <a href="?eliminar=true&id=<?php echo $usuario['id']; ?>" class="btn btn-danger btn-delete">Eliminar</a>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                <?php
+                    $contadorId++; 
+                endforeach; ?>
             </tbody>
         </table>
     </div>

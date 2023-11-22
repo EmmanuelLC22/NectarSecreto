@@ -3,18 +3,18 @@
 
 include('../modelo/conexionPDO.php');
 
-// Verifica si se proporciona un ID válido en la URL
+
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Consulta el producto con el ID proporcionado
+    
     $sql = 'SELECT * FROM productos WHERE id = :id';
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Cierra la conexión
+    
     $conn = null;
 
     if (!$producto) {
@@ -89,9 +89,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
      <div class="container mt-4">
         <h2>Editar Producto</h2>
 
-        <!-- Formulario para editar producto -->
+        
         <form action="procesar_editar.php" method="post" enctype="multipart/form-data">
-            <!-- Agrega los campos del formulario con los valores actuales del producto -->
+            
             <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
             <div class="form-group">
                 <label for="nombre">Nombre del Producto</label>
@@ -113,8 +113,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <button type="submit" class="btn btn-success">Guardar Cambios</button>
         </form>
     </div>
-
-    <!-- Resto del código HTML (omitiendo para brevedad) -->
 
 </body>
 </html>

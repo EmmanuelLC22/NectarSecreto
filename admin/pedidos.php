@@ -1,18 +1,16 @@
 <?php
-// pedidos.php
 
-// Incluye el contenido de conexionPDO.php sin modificarlo
 require_once('../modelo/conexionPDO.php');
 
-// Consulta todos los datos_compra ordenados por ID
+
 $sql = 'SELECT * FROM datos_compra ORDER BY id';
 
 try {
     $resultado = $conn->query($sql);
 
-    // Verifica si hay resultados
+    
     if ($resultado) {
-        // Obtiene todos los datos_compra
+        
         $compras = $resultado->fetchAll(PDO::FETCH_ASSOC);
     } else {
         echo 'Error al obtener datos de compra: ' . $conn->errorInfo()[2];
@@ -22,7 +20,7 @@ try {
     exit();
 }
 
-// Cierra la conexión
+
 $conn = null;
 ?>
 
@@ -37,7 +35,7 @@ $conn = null;
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../img/logo3.ico">
     <style>
-        /* Personalizaciones adicionales de estilo */
+
         body {
             background-color: #f8f9fa;
         }
@@ -95,7 +93,7 @@ $conn = null;
     <div class="container mt-4">
         <h2>Administrar Compras</h2>
 
-<!-- Lista de compras -->
+
 <table class="table table-bordered table-hover">
     <thead class="thead-light">
         <tr>
@@ -110,9 +108,9 @@ $conn = null;
         </tr>
     </thead>
     <tbody>
-        <!-- Genera dinámicamente las filas de la tabla -->
+        
         <?php
-        $fila = 1; // Inicializa la variable de fila
+        $fila = 1; 
         foreach ($compras as $compra): ?>
             <tr>
                 <td><?php echo $fila++; ?></td>
@@ -122,16 +120,16 @@ $conn = null;
                 <td><?php echo $compra['apellido_materno']; ?></td>
                 <td>
                     <?php
-                        // Decodifica el JSON en la columna productos_json
+                        
                         $productos = json_decode($compra['productos_json'], true);
                         
-                        // Muestra las imágenes, nombres y cantidades de los productos
+                        
                         foreach ($productos as $producto) {
                             echo '<div>';
                             echo '<img src="' . $producto['imagen'] . '" alt="Imagen del Producto" style="max-width: 100px; margin-right: 5px;">';
                             echo 'Nombre: ' . $producto['nombre'] . '<br>';
                             
-                            // Verifica si la clave "cantidad" está presente antes de mostrarla
+                            
                             if (isset($producto['cantidad'])) {
                                 echo 'Cantidad: ' . $producto['cantidad'] . '<br>';
                             } else {
@@ -155,11 +153,11 @@ $conn = null;
 
     <script src="js/bootstrap.min.js"></script>
     <script>
-    // Función para eliminar una compra
+    
     function eliminarCompra(id) {
-        // Confirmar si realmente desea eliminar
+        
         if (confirm('¿Está seguro de que desea eliminar este pedido?')) {
-            // Realizar la solicitud AJAX para eliminar el pedido
+            
             fetch('eliminar_pedido.php', {
                 method: 'POST',
                 headers: {
@@ -170,11 +168,11 @@ $conn = null;
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Eliminación exitosa, recargar la página o actualizar la interfaz según sea necesario
+                    
                     alert('Pedido eliminado correctamente');
-                    location.reload(); // Recargar la página
+                    location.reload(); 
                 } else {
-                    // Manejar errores si es necesario
+                    
                     alert('Error al eliminar el pedido: ' + data.error);
                 }
             })

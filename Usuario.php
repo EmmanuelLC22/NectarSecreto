@@ -1,25 +1,60 @@
 <?php
+
+session_start();
+
 require_once('./modelo/conexionPDO.php');
 
-$sql = 'SELECT * FROM t_usuarios LIMIT 1';
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../../index.php");
+    exit();
+}
+
+$correoUsuario = $_SESSION['usuario_correo'];
+
+
+if (!$conn) {
+    echo "Error: No se pudo establecer la conexión a la base de datos.";
+    exit();
+}
+
+$sql = 'SELECT * FROM t_usuarios WHERE correo = :correo';
 
 try {
-    // Prepara la consulta
     $stmt = $conn->prepare($sql);
-
-    // Ejecuta la consulta
+    $stmt->bindParam(':correo', $correoUsuario);
     $stmt->execute();
-
-    // Obtiene los datos del usuario
     $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
 } catch (Exception $e) {
     echo "Error al ejecutar la consulta: " . $e->getMessage();
     exit();
 }
 
-// Cierra la conexión
-$conn = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+    $targetDir = "img/";  
+    $targetFile = $targetDir . uniqid('imagen_') . '.' . pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $targetFile)) {
+        
+        $sqlUpdateImagen = 'UPDATE t_usuarios SET imagen_perfil = :imagen WHERE correo = :correo';
+        try {
+            $stmtUpdateImagen = $conn->prepare($sqlUpdateImagen);
+            $stmtUpdateImagen->bindParam(':imagen', $targetFile);
+            $stmtUpdateImagen->bindParam(':correo', $correoUsuario);
+            $stmtUpdateImagen->execute();
+        } catch (Exception $e) {
+            echo "Error al actualizar la imagen en la base de datos: " . $e->getMessage();
+            exit();
+        }
+
+        
+        header("Location: Usuario.php");
+        exit();
+    } else {
+        echo "Lo siento, hubo un error al subir tu archivo.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,9 +76,9 @@ $conn = null;
         <nav>
             <ul class="link">
                 <li><a href="./indexUsuario.php">HOME</a></li>
-				<li><a href="./general.php">TIENDA</a></li>
-				<li><a href="./nosotros.php">NOSOTROS</a></li>
-				<li><a href="./tiendas.php">TIENDAS</a></li>
+                <li><a href="./general.php">TIENDA</a></li>
+                <li><a href="./nosotros.php">NOSOTROS</a></li>
+                <li><a href="./tiendas.php">TIENDAS</a></li>
                 <li><a href="./historial.php">HISTORIAL</a></li>
                 <li><a href="./carrito.php">CARRITO</a></li>
                 <li><a href="./Usuario.php">USUARIO</a></li>
@@ -52,14 +87,21 @@ $conn = null;
         </nav>
     </header>
 
-    <br><br><br><br><br>
+    <br><br><br><br><br><br>
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <br><br>
-                    <img src="https://cdn-icons-png.flaticon.com/512/456/456212.png" alt="">
-                </div>
+            <div class="center">
+        
+        <?php if (!empty($usuario['imagen_perfil'])): ?>
+            <img src="<?php echo $usuario['imagen_perfil']; ?>" alt="Imagen de perfil">
+        <?php endif; ?>
+            <br><br>
+        <form method="post" action="Usuario.php" enctype="multipart/form-data">
+            <label for="imagen">Selecciona una imagen:</label>
+            <input type="file" name="imagen" id="imagen" accept="image/*"><br><br>
+            <button type="submit" class="btn btn-dark">Subir Imagen</button>
+        </form>
 
                 <div class="col-md-4"></div>
 
@@ -72,8 +114,9 @@ $conn = null;
                 </div>
                 <br>
                 <div class="justificado">
+                    <br>
                     <h4>Nombre completo:</h4>
-                    <p><?php echo $usuario['nombreUsuario'] . ' ' . $usuario['aPaterno']. ' ' . $usuario['aMaterno']; ?></p>
+                    <p><?php echo $usuario['nombreUsuario'] . ' ' . $usuario['aPaterno'] . ' ' . $usuario['aMaterno']; ?></p>
                     <br>
                     <h4>Número fijo:</h4>
                     <p><?php echo $usuario['telefono']; ?></p>
@@ -82,7 +125,6 @@ $conn = null;
                     <p><?php echo $usuario['correo']; ?></p>
                     <br>
                     <div class="center">
-                        <!-- Agregado el formulario para cerrar sesión -->
                         <form method="post" action="cerrar_sesion.php">
                             <button type="submit" class="btn btn-dark">Cerrar sesión</button>
                         </form>
@@ -90,53 +132,45 @@ $conn = null;
                     <br>
                 </div>
                 <hr>
-                <div class="center"><H1>Productos de la tienda</H1></div>
-                <br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="https://www.aromesdemorella.com/128-thickbox_default/jabon-avena-y-miel-100gr.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">JABONES</h5>
-                                <p class="card-text">Visita nuestra tienda en línea y conoce nuestros productos!</p>
-                                <a href="./general.php" class="btn btn-dark">Visitar</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="https://mahaloficial.com/wp-content/uploads/2022/02/shampoo_Miel.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">SHAMPOOS</h5>
-                                <p class="card-text">Al tener una cuenta podrás opinar acerca de nuestros productos y comprar más fácilmente</p>
-                                <a href="./general.php" class="btn btn-dark">Visitar</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="card-img-top" src="https://verbena.co/cdn/shop/products/balsamo_labial_miel_verbena.jpg?v=1637893554" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Bálsamo</h5>
-                                <p class="card-text">Conoce las tiendas más cercanas a tu hogar para comprar tus productos favoritos</p>
-                                <a href="./general.php" class="btn btn-dark">Visitar</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="center"><h1>Productos de la tienda</h1></div>
+
+<div class="row">
+    <?php
+    
+    $sqlSugerencias = "SELECT * FROM productos ORDER BY RAND() LIMIT 3";
+    $stmtSugerencias = $conn->prepare($sqlSugerencias);
+    $stmtSugerencias->execute();
+    $productosSugeridos = $stmtSugerencias->fetchAll(PDO::FETCH_ASSOC);
+    
+    
+    foreach ($productosSugeridos as $productoSugerido): ?>
+        <div class="col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="./modelo/<?php echo $productoSugerido['imagen']; ?>" alt="Imagen del Producto Sugerido">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $productoSugerido['nombre']; ?></h5>
+                    <p class="card-text"><?php echo $productoSugerido['descripcion']; ?></p>
+                    <p class="card-text">$<?php echo $productoSugerido['precio']; ?></p>
+                    <a href="comprar.php?id=<?php echo $productoSugerido['id']; ?>" class="btn btn-dark">Ver Detalles</a>
                 </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+                
             </div>
         </div>
     </section>
 
     <script type="text/javascript">
-        window.addEventListener("scroll", function(){
+        window.addEventListener("scroll", function () {
             var header = document.querySelector("header");
-            header.classList.toggle("abajo",window.scrollY>0);
+            header.classList.toggle("abajo", window.scrollY > 0);
         })
     </script>
 
     <footer>
-        <P>Boulevard Belizario Domìnguez, kilómetro 1081, sin número. Teràn Tuxtla Gutiérrez, Chiapas.</P>
+        <p>Boulevard Belizario Domìnguez, kilómetro 1081, sin número. Teràn Tuxtla Gutiérrez, Chiapas.</p>
         <p>&copy; 2023 Derechos reservados</p>
     </footer>
 </body>

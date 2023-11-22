@@ -1,41 +1,39 @@
 <?php
-// comprar.php
 
-// Inicia la sesión
 session_start();
 
-// Incluye el archivo de conexión
+
 include('./modelo/conexionPDO.php');
 
-// Verifica si se proporcionó un ID de producto en la URL
+
 if (isset($_GET['id'])) {
     $producto_id = $_GET['id'];
 
-    // Consulta el producto específico
+    
     $sql = "SELECT * FROM productos WHERE id = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $producto_id);
     $stmt->execute();
 
-    // Obtiene la información del producto
+    
     $producto = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Consulta tres productos al azar, excluyendo el producto actual
+    
     $sqlSugerencias = "SELECT * FROM productos WHERE id != :id ORDER BY RAND() LIMIT 3";
     $stmtSugerencias = $conn->prepare($sqlSugerencias);
     $stmtSugerencias->bindParam(':id', $producto_id);
     $stmtSugerencias->execute();
 
-    // Obtiene la información de los productos sugeridos
+    
     $productosSugeridos = $stmtSugerencias->fetchAll(PDO::FETCH_ASSOC);
 
-    // Cierra la conexión
+    
     $conn = null;
 
-    // Almacena el producto en el carrito de la sesión
+    
     $_SESSION['carrito'][] = $producto;
 } else {
-    // Si no se proporcionó un ID, redirige a la página de tienda
+   
     header('Location: tienda.php');
     exit();
 }
@@ -86,7 +84,7 @@ if (isset($_GET['id'])) {
                 <h2><?php echo $producto['nombre']; ?></h2>
                 <p><?php echo $producto['descripcion']; ?></p>
                 <p>Precio: $<?php echo $producto['precio']; ?></p>
-                <!-- Puedes agregar más información del producto aquí -->
+                
                 <a href="#" class="btn btn-warning">Comprar Ahora</a>
                 <a href="carrito.php?id=<?php echo $producto['id']; ?>" class="btn btn-dark">Agregar al carrito</a>
             </div>

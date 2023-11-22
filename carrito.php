@@ -1,13 +1,9 @@
 <?php
-// carrito.php
 
-// Inicia la sesión
 session_start();
 
-// Incluye el archivo de conexión
 include_once('./modelo/conexionPDO.php');
 
-// Verifica si existe un carrito en la sesión
 if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
     echo '
         <!DOCTYPE html>
@@ -49,9 +45,9 @@ if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
         </html>';
     exit();
 } else {
-    // Intenta obtener la conexión a la base de datos
+    
     try {
-        // Incluimos directamente el archivo de conexión
+        
         include_once('./modelo/conexionPDO.php');
     } catch (PDOException $e) {
         exit("Error de conexión: " . $e->getMessage());
@@ -105,7 +101,7 @@ if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
 
     $totalCarrito = 0;
 
-    // Itera sobre los productos en el carrito
+    
     foreach ($_SESSION['carrito'] as $indice => $productoCarrito) {
         $totalProducto = $productoCarrito['precio'] * (isset($productoCarrito['cantidad']) ? $productoCarrito['cantidad'] : 1);
         $totalCarrito += $totalProducto;
@@ -155,7 +151,7 @@ if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
         </form>
         </div>';
 
-    // Cierra la conexión a la base de datos
+    
     $conn = null;
 
     echo '

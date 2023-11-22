@@ -1,22 +1,18 @@
 <?php
-// admin.php
 
-// Incluye el archivo de conexión
 include('../modelo/conexionPDO.php');
 
-// Consulta todos los productos con ID ordenado
 $sql = 'SELECT * FROM productos ORDER BY id';
 $resultado = $conn->query($sql);
 
-// Verifica si hay resultados
 if ($resultado) {
-    // Obtiene todos los productos
+
     $productos = $resultado->fetchAll(PDO::FETCH_ASSOC);
 } else {
     echo 'Error al obtener productos: ' . $conn->errorInfo()[2];
 }
 
-// Cierra la conexión
+
 $conn = null;
 ?>
 
@@ -31,7 +27,7 @@ $conn = null;
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../img/logo3.ico">
     <style>
-        /* Personalizaciones adicionales de estilo */
+    
         body {
             background-color: #f8f9fa;
         }
@@ -87,7 +83,7 @@ $conn = null;
     <div class="container mt-4">
     <h2>Administrar Productos</h2>
 
-    <!-- Lista de productos -->
+   
     <table class="table table-bordered table-hover">
         <thead class="thead-light">
             <tr>
@@ -100,9 +96,9 @@ $conn = null;
             </tr>
         </thead>
         <tbody>
-            <!-- Genera dinámicamente las filas de la tabla -->
+           
             <?php
-            $fila = 1; // Inicializa la variable de fila
+            $fila = 1; 
             foreach ($productos as $producto): ?>
                 <tr>
                     <td><?php echo $fila++; ?></td>
@@ -119,7 +115,7 @@ $conn = null;
         </tbody>
     </table>
 
-    <!-- Botón para agregar producto -->
+
     <a href="agregar.php" class="btn btn-success">Agregar Producto</a>
 </div>
 
